@@ -3,8 +3,8 @@
 - [팀원정보](#Members)
 - [프로젝트 소개](#about_project)
 - [활동방법](#HowToDo)
-  - [커뮤니티 활동 계획](#plan)
-  - [개인별 기여방법](#WhatToDo)
+  - [1. 커뮤니티 활동 계획](#plan)
+  - [2. 개인별 기여방법](#WhatToDo)
 
 
 ## <div id="HOME_PAGE">Homepage</div>
@@ -211,9 +211,12 @@ Existing files in `sources/` should be edited in-line.
 | weight| 가중치|
 | wrapper| 래퍼|
 
-## <div id="HowToDo">활동방법</div>
+## <div id="HowToDo">활동방법</div><br>
   
-## <div id="plan">1. 커뮤니티 활동 계획</div>
+케라스 공식 페이지에 올라와 있는 영문 글들을 번역 양식에 맞게 한글로 번역하는 활동을 진행할 것이다. 현재 이미 번역되어 있는 글들도 다수 존재하기 때문에, 그들을 제외한 Examples(https://keras.io/examples/addition_rnn/) 부분에 올라와 있는 글들을 집중적으로 번역할 예정이다. 또, 번역을 진행하고, 팀원간 오류 검토 작업을 통해서 오류를 줄일 예정이다.
+  
+  
+### <div id="plan">1. 커뮤니티 활동 계획</div>
 9주차 : 팀프로젝트 선정, 개인별 기여방식 논의<br>
 10주차 : 팀 static page 생성, 프로젝트별 소개 페이지 작성<br>
 11주차 : 선정 커뮤니티(프로젝트) 소개, 활동 방법, 활동 계획, 개인별 역할 정리 후 static page에 작성<br>
@@ -222,7 +225,7 @@ Existing files in `sources/` should be edited in-line.
 14주차 :   
 15주차 :  
   
-## <div id="WhatToDo">2. 개인별 기여방법</div>
+### <div id="WhatToDo">2. 개인별 기여방법</div>
 
 **팀장: 김태규**  
 
