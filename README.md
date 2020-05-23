@@ -226,33 +226,33 @@ Existing files in `sources/` should be edited in-line.
 
 **팀장: 김태규**  
 
-> 문서 번역<br>
+> - 문서 번역<br>
 > : Baby RNN, Baby MemNN, CIFAR-10 CNN, CIFAR-10 ResNet, Confolution filter visualization
 오류/버그 수정<br>
-> 정적 페이지 총괄 
-> github issue 관리<br>
+> - 정적 페이지 총괄 
+> - github issue 관리<br>
   
   
 **팀원: 박정은**  
   
-> 문서 번역<br>
+> - 문서 번역<br>
 > : Fasttext for text classification, Sentiment classification LSTM, Sequence to sequence – training, Sequence to sequence – prediction
 오류/버그 수정<br>
-> 정적 페이지 관리
-> github readme 제작 및 관리<br>
+> - 정적 페이지 관리
+> - github readme 제작 및 관리<br>
   
 **팀원: 김유현**  
 
-> 문서 번역<br>
+> - 문서 번역<br>
 > : 1D CNN for text classification, sentiment classification, CNN-LSTM, Stateful LSTM, LSTM for text generation, Custom layer – antirectifier
 오류/버그 수정<br>
-> 정적 페이지 관리
-> github project 관리<br>
+> - 정적 페이지 관리
+> - github project 관리<br>
 
 **팀원: 이동준**
 
-> 문서 번역<br>
+> - 문서 번역<br>
 > : Deep Dream, Image OCR, Auxiliary Classifier GAN, Convolutional LSTM, Bidrectional LSTM
 오류/버그 수정<br>
-> 정적 페이지 관리
-> github wiki 관리<br>
+> - 정적 페이지 관리
+> - github wiki 관리<br>
