@@ -3,8 +3,8 @@
 - [팀원정보](#Members)
 - [프로젝트 소개](#about_project)
 - [활동방법](#HowToDo)
-- [커뮤니티 활동 계획](#plan)
-- [개인별 기여방법](#WhatToDo)
+  - [커뮤니티 활동 계획](#plan)
+  - [개인별 기여방법](#WhatToDo)
 
 
 ## <div id="HOME_PAGE">Homepage</div>
@@ -18,17 +18,17 @@ https://20-1-skku-oss.github.io/2020-1-OSS-8/
 GitHub ID:  kimtaegyuu<br>
   
 ### 팀원  
-이름: 박정은<br>
+이름: 박정은
 학번: 2019312522<br>
 이메일: jeongeun0916@gmail.com<br>
 GitHub ID: jepark132<br>
   
-이름: 김유현<br>   
+이름: 김유현   
 학번: 2019314665 <br> 
 이메일: sustkadl12@gmail.com  <br> 
 GitHub ID: Idontknowrithm  <br>
   
-이름: 이동준<br>   
+이름: 이동준   
 학번: 2017312576 <br> 
 이메일: ldj9876@naver.com <br>
 GitHub ID: ldj9876<br>
@@ -40,7 +40,7 @@ GitHub ID: ldj9876<br>
 
 https://github.com/keras-team/keras-docs-ko
 
-# Korean translation of the Keras documentation
+## Korean translation of the Keras documentation
 
 This is the repository for the Korean-language `.md` sources files of [keras.io](https://keras.io).
 
@@ -48,7 +48,7 @@ Existing files in `sources/` should be edited in-line.
 
 ---
 
-## 케라스 공식 문서 한국어판
+### 케라스 공식 문서 한국어판
 케라스 공식 문서의 한국어판입니다. 이미 딥러닝에 익숙한 연구자 및 개발자 외에도 처음 딥러닝을 접하는 사용자들이 최대한 쉽게 이해하고 사용할 수 있도록 그 의미와 용법, 용례가 정확하고 명료하게 그리고 최대한 자연스러운 문장으로 나타나도록 작성되었습니다. 
 
 ### 번역 가이드라인
@@ -212,10 +212,8 @@ Existing files in `sources/` should be edited in-line.
 | wrapper| 래퍼|
 
 ## <div id="HowToDo">활동방법</div>
-
   
-  
-## <div id="plan">커뮤니티 활동 계획</div>
+## <div id="plan">1. 커뮤니티 활동 계획</div>
 9주차 : 팀프로젝트 선정, 개인별 기여방식 논의<br>
 10주차 : 팀 static page 생성, 프로젝트별 소개 페이지 작성<br>
 11주차 : 선정 커뮤니티(프로젝트) 소개, 활동 방법, 활동 계획, 개인별 역할 정리 후 static page에 작성<br>
@@ -224,7 +222,7 @@ Existing files in `sources/` should be edited in-line.
 14주차 :   
 15주차 :  
   
-## <div id="WhatToDo">개인별 기여방법</div>
+## <div id="WhatToDo">2. 개인별 기여방법</div>
 
 **팀장: 김태규**  
 
