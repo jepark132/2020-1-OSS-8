@@ -18,7 +18,7 @@ https://20-1-skku-oss.github.io/2020-1-OSS-8/
 GitHub ID:  kimtaegyuu<br>
   
 ### 팀원  
-이름: 박정은
+이름: 박정은<br>
 학번: 2019312522<br>
 이메일: jeongeun0916@gmail.com<br>
 GitHub ID: jepark132<br>
