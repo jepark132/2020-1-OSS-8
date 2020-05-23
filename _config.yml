@@ -1,3 +1,4 @@
+  
 title: Texture Theme
 author: GitHub User
 email: your-email@domain.com
@@ -6,10 +7,6 @@ description: > # this means to ignore newlines until "show_exerpts:"
   line in _config.yml. It will appear in your document head meta (for
   Google search results) and in your feed.xml site description.
 show_excerpts: true # set to true to show excerpts on the homepage
-url: "https://20-1-skku-oss.github.io"
-baseurl: 
-
-remote_theme: thelehhman/texture
 
 # Minima date format
 # refer to http://shopify.github.io/liquid/filters/date/ if you want to customize this
@@ -18,8 +15,8 @@ sass:
 
 permalink: /posts/:title/
 texture:
-  title: 20-1-SKKU-OSS
-  tagline: OSS-8
+  title: Adam Denisov
+  tagline: Developer. Designer
   date_format: "%b %-d, %Y"
   style: black
   showNav: false
@@ -27,9 +24,9 @@ texture:
 
   # generate social links in footer
   social_links:
-   
-    github:  20-1-SKKU-OSS/2020-1-OSS-8
-
+    twitter: thelehhman
+    github:  thelehhman
+    linkedIn: in/thelehhman
     rss: rss
  
 
