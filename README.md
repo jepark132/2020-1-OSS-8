@@ -18,20 +18,20 @@ https://20-1-skku-oss.github.io/2020-1-OSS-8/
 GitHub ID:  kimtaegyuu<br>
   
 ### 팀원  
-이름: 박정은   
-학번: 2019312522
-이메일: jeongeun0916@gmail.com
-GitHub ID: jepark132  
+이름: 박정은<br>
+학번: 2019312522<br>
+이메일: jeongeun0916@gmail.com<br>
+GitHub ID: jepark132<br>
   
-이름: 김유현   
-학번: 2019314665  
-이메일: sustkadl12@gmail.com   
-GitHub ID: Idontknowrithm  
+이름: 김유현<br>   
+학번: 2019314665 <br> 
+이메일: sustkadl12@gmail.com  <br> 
+GitHub ID: Idontknowrithm  <br>
   
-이름: 이동준   
-학번: 2017312576  
-이메일: ldj9876@naver.com 
-GitHub ID: ldj9876
+이름: 이동준<br>   
+학번: 2017312576 <br> 
+이메일: ldj9876@naver.com <br>
+GitHub ID: ldj9876<br>
 
 ## <div id="about_project">프로젝트 소개</div>
 ### keras-docs-ko
@@ -49,7 +49,7 @@ Existing files in `sources/` should be edited in-line.
 ---
 
 ## 케라스 공식 문서 한국어판
-케라스 공식 문서의 한국어판입니다. 이미 딥러닝에 익숙한 연구자 및 개발자 외에도 처음 딥러닝을 접하는 사용자들이 최대한 쉽게 이해하고 사용할 수 있도록 그 의미와 용법, 용례가 정확하고 명료하게 그리고 최대한 자연스러운 문장으로 나타나도록 작성되었습니다. :open_book::writing_hand::full_moon_with_face:
+케라스 공식 문서의 한국어판입니다. 이미 딥러닝에 익숙한 연구자 및 개발자 외에도 처음 딥러닝을 접하는 사용자들이 최대한 쉽게 이해하고 사용할 수 있도록 그 의미와 용법, 용례가 정확하고 명료하게 그리고 최대한 자연스러운 문장으로 나타나도록 작성되었습니다. 
 
 ### 번역 가이드라인
 
