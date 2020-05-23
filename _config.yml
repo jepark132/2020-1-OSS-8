@@ -7,7 +7,7 @@ description: > # this means to ignore newlines until "show_exerpts:"
   Google search results) and in your feed.xml site description.
 show_excerpts: true # set to true to show excerpts on the homepage
 baseurl: 
-url: "https://20-1-skku-oss.github.io/2020-1-OSS-8"
+
 remote_theme: thelehhman/texture
 
 # Minima date format
@@ -21,7 +21,7 @@ texture:
   tagline: OSS-8
   date_format: "%b %-d, %Y"
   style: black
-  showNav: true
+  showNav: false
   showPicker: true
 
   # generate social links in footer
@@ -34,7 +34,8 @@ texture:
 
 # If you want to link only specific pages in your header, uncomment
 # this and add the path to the pages in order as they should show up
-
+#header_pages:
+# - about.md
 
 # Build settings
 # theme: texture
