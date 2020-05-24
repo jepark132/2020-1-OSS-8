@@ -4,7 +4,7 @@ bio:                'Jekyll version of the Massively theme by HTML5UP'
 description:        "Jekyll version of the Massively theme by HTML5UP"
 locale:             en_US
 baseurl: 20-1-SKKU-OSS/2020-1-OSS-8
-url: "" # the base hostname & protocol for your site
+url: https://20-1-skku-oss.github.io/2020-1-OSS-8/
 
 # Comments
 disqus_shortname:   default
