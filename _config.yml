@@ -12,10 +12,7 @@ disqus_shortname:   default
 
 # Social
 analytics-id:       "default"
-twitter:            default
-facebook:           default
-instagram:          default
-github:             default
+github:             "https://20-1-skku-oss.github.io/2020-1-OSS-8/"
 
 # personal
 location:           Suwon, Korea
