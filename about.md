@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About
+title: About Us
 permalink: /about/
 ---
 ## Team 8
@@ -11,6 +11,5 @@ permalink: /about/
 *  [이동준(2017312576)](https://github.com/ldj9876)  
 
 ## Projects
-* __[chrome-tabnote-post](/posts/chrome-tabnote-post)__  
 * __[keras-docs-ko](/posts/keras-docs-ko-pos)__  
 
