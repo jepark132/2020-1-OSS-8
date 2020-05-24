@@ -7,7 +7,7 @@ sitemap:
     lastmod: 2017-11-02
     changefreq: weekly
 ---
-## <div id="Members">팀원 정보</div>  
+## 팀원 정보
 ### 팀장  
 이름: 김태규<br>
 학번:  2017311902<br>
