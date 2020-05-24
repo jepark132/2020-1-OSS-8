@@ -3,9 +3,9 @@ title:              20-1-SKKU-OSS-8
 bio:                'Jekyll version of the Massively theme by HTML5UP'
 description:        "Jekyll version of the Massively theme by HTML5UP"
 locale:             en_US
-baseurl:
+baseurl: 20-1-SKKU-OSS/2020-1-OSS-8
 url: 
-remote_theme: jekyllup/jekyll-theme-massively
+# remote_theme: jekyllup/jekyll-theme-massively
 
 # Comments
 disqus_shortname:   default
