@@ -1,10 +1,10 @@
-##이 예제는 텍스트 분류를 위한 Convolution1D의 사용을 보여줍니다. </br>
+## 이 예제는 텍스트 분류를 위한 Convolution1D의 사용을 보여줍니다. </br>
 
 2회 반복 후 0.89 만큼의 시험 정확도에 다다릅니다. </br>
 Intel i5 2.4Ghz CPU 환경에서 90초/에폭. </br>
 Tesla K40 GPU 환경에서 10초/에폭.
 
-'''pyhon
+```python
 from __future__ import print_function
 
 from keras.preprocessing import sequence
@@ -71,4 +71,4 @@ model.fit(x_train, y_train,
           batch_size=batch_size,
           epochs=epochs,
           validation_data=(x_test, y_test))
-'''
+```
