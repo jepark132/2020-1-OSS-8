@@ -14,6 +14,7 @@ Bi-gram  |            0.9056|    2|GTx 980M GPU
 
 
 ```python
+
 from __future__ import print_function
 import numpy as np
 
