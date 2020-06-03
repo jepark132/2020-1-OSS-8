@@ -1,8 +1,7 @@
-```python
 ## IMDB 감성 분류 작업에서 순환 합성곱 네트워크를 학습시킵니다.
 
 2회 반복 후 테스트 정확도가 0.8498에 다다릅니다. K520 GPU에서 41초/에폭.
-```
+```python
 from __future__ import print_function
 
 from keras.preprocessing import sequence
@@ -74,3 +73,4 @@ model.fit(x_train, y_train,
 score, acc = model.evaluate(x_test, y_test, batch_size=batch_size)
 print('Test score:', score)
 print('Test accuracy:', acc)
+```
