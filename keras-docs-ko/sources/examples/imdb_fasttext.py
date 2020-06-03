@@ -1,4 +1,4 @@
-#이 예는 텍스트 분류를 위한 빠른 텍스트의 사용을 보여준다.
+# 이 예는 텍스트 분류를 위한 빠른 텍스트의 사용을 보여준다.
 
 Joulin et al의 논문을 바탕으로 함: 
     
@@ -12,8 +12,8 @@ Embedding|Accuracy, 5 epochs|Speed (s/epoch)|Hardware
 Uni-gram |            0.8813|    8|i7 CPU
 Bi-gram  |            0.9056|    2|GTx 980M GPU
 
-'''
 
+```python
 from __future__ import print_function
 import numpy as np
 
@@ -141,3 +141,4 @@ model.fit(x_train, y_train,
           batch_size=batch_size,
           epochs=epochs,
           validation_data=(x_test, y_test))
+```
