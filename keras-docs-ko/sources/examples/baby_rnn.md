@@ -6,7 +6,7 @@
 결과는 Weston 등에 의해 제공 되어진 LSTM 모델과 비교 된다.: : "Towards AI-Complete Question Answering: A Set of Prerequisite Toy Tasks" http://arxiv.org/abs/1502.05698
 
 
-| 일 번호 |FB LSTM Baseline|Keras QA|
+| task 번호 |FB LSTM Baseline|Keras QA|
 | ----- | ----: | --------------: |
 | QA1 - Single Supporting Fact | 50 | 52.1 |
 | QA2 - Two Supporting Facts | 20 | 37.0 |
@@ -28,10 +28,11 @@
 | QA18 - Size Reasoning | 52 | 90.8 |
 | QA19 - Path Finding | 8 | 9.0 |
 | QA20 - Agent's Motivations | 91 | 90.7 |
+
 bAbI 프로젝트와 연관된 자료이다.
 https://research.facebook.com/researchers/1543934539189348  
 
-#메모
+# 메모
 * 기본 단어, 문장 및 쿼리 벡터 크기를 통해 GRU 모델은 다음을 달성합니다
 * 20 epoch에서 QA1에 대한 52.1 % 테스트 정확도 (CPU epoch 당 2 초)
 * 20 epoch에서 QA2에 대한 37.0 % 테스트 정확도 (CPU epoch 당 16 초) 이에 비해 Facebook 글 LSTM 기준선에 대해 50 % 및 20 %를 달성합니다
