@@ -1,6 +1,11 @@
-예측을 생성하려면 문자 수준 시퀀스를 시퀀스 모델로 복원하십시오.
+# 예측을 생성하려면 문자 수준 시퀀스를 시퀀스 모델로 복원하십시오.
+
 이 스크립트는  lstm_seq2seq.py 에 의해 저장된  s2s.h5  모델을 로드하고 그것으로부터 시퀀스를 생성한다. 그것은 어떠한 변경도 이루어지지 않았다고 가정한다(예: latent_dim  은 변경되지 않고, 입력 데이터와 모델 아키텍처는 변경되지 않는다).
+
 모델 아키텍처 및 모델 아키텍처 교육 방법에 대한 자세한 내용은  lstm_seq2seq.py를 참조하십시오.
+
+
+```python
 from __future__ import print_function
 
 from keras.models import Model, load_model
@@ -143,3 +148,4 @@ for seq_index in range(100):
     print('Input sentence:', input_texts[seq_index])
     print('Decoded sentence:', decoded_sentence)
 
+```
