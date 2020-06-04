@@ -1,4 +1,5 @@
-Keras에서 Sequence-to-sequence 예제  (문자수준)
+# Keras에서 Sequence-to-sequence 예제  (문자수준)
+
 이 스크립트는 기본적인 문자 수준의 " sequence-to-sequence " 모델을 구현하는 방법을 보여준다. 우리는 이것을 문자 대 문자로 짧은 영어 문장을 짧은 프랑스어 문장으로 번역하는 데 적용한다. 단어 수준 모델이 이 도메인에서 더 일반적이기 때문에 문자 수준 기계 변환을 하는 것은 상당히 이례적이라는 점에 유의하시오.
 알고리즘 요약
 •	우리는 도메인(영어문장)에서 인풋 시퀀스를 시작하고, 또 다른 도메인(프랑스어 문장)에서 corresponding target sequences를 시작한다.
@@ -17,6 +18,8 @@ o	시퀀스 종료 문자를 생성하거나 문자 한계에 도달할 때까�
 참조
 •	 신경망을 이용한Sequence to Sequence 
 •	Statical Machine 변환용 RNN 인코더-디코더를 이용한 학습 문구 표현 방법  
+
+```python
 from __future__ import print_function
 
 from keras.models import Model
@@ -200,4 +203,4 @@ for seq_index in range(100):
     print('-')
     print('Input sentence:', input_texts[seq_index])
     print('Decoded sentence:', decoded_sentence)
-
+```
