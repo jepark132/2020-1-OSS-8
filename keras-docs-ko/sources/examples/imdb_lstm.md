@@ -1,5 +1,4 @@
-```python
-## IMDB 감정 분류 작업에서의 LSTM 모델 학습
+# IMDB 감정 분류 작업에서의 LSTM 모델 학습
 
 데이터셋이 LSTM에 대해 너무 작아서 TF-IDF + LogReg 와 같이 간단하고
 훨씬 빠른 방법에 비해 어떠한 이점도 가질 수 없습니다.
@@ -10,7 +9,7 @@
 
 - 학습 시 LSTM 손실 감소 패턴은 CNN, MLP 등에서 보이는 양상과 다소 다를 수 있습니다.
 
-```
+```python
 from __future__ import print_function
 
 from keras.preprocessing import sequence
@@ -55,3 +54,4 @@ score, acc = model.evaluate(x_test, y_test,
                             batch_size=batch_size)
 print('Test score:', score)
 print('Test accuracy:', acc)
+```
