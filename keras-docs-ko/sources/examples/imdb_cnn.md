@@ -14,7 +14,7 @@ from keras.layers import Embedding
 from keras.layers import Conv1D, GlobalMaxPooling1D
 from keras.datasets import imdb
 
-# set parameters:
+# 파라미터 설정:
 max_features = 5000
 maxlen = 400
 batch_size = 32
