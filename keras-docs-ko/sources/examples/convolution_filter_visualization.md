@@ -4,7 +4,7 @@
 이 스크립트는 몇 분 안에 CPU에서 실행될 수 있습니다.
 
 결과 예시:
-![example](./img/ml.jpg)
+![example](./images/ml.jpg)
 
 
 ``` python
