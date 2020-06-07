@@ -1,7 +1,7 @@
 ---
 name: Confirm issue template
 about: 컨펌 시 아래 양식으로 작성해주시기 바랍니다.
-title: "[confirm]"
+title: "[번역수정요청]"
 labels: documentation
 assignees: ''
 
