@@ -38,7 +38,7 @@ from keras.layers import Input, LSTM, Dense
 import numpy as np
 
 batch_size = 64  # 훈련을 위한 배치 사이즈
-epochs = 100  # 훈련할 epochs의 수
+epochs = 100  # 훈련할 에포크의 수
 latent_dim = 256  # 인코딩 공간의 잠재적 차원성
 num_samples = 10000  # 훈련할 예제의 개수
 # 디스크 데이터 txt파일의 경로. 
@@ -139,7 +139,7 @@ model.fit([encoder_input_data, decoder_input_data], decoder_target_data,
 model.save('s2s.h5')
 
 # 다음 : 추론 모드(샘플링)
-# Here's the drill:
+# 훈련 방식:
 # 1) 입력 인코딩 및 초기 디코더 상태 검색
 # 2) 초기 상태를 이용하여 디코더의 한 단계를 실행한다.
 # 그리고 "start of sequence"토큰을 타겟으로. 
