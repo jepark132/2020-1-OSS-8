@@ -46,8 +46,8 @@ num_classes = 10
 
 
 def build_generator(latent_size):
-    # 한 쌍의 (z, L)을 매핑합니다. 여기서 z는 잠재 벡터이고, 은 
-    # P_c에서 이미지 공간 (...,28,28,1) 로 그려진 레이블 입니다.
+    # 한 쌍의 (z, L)을 매핑합니다. 여기서 z는 잠재 벡터이고, L은 
+    # P_c에서 이미지 공간 (...,28,28,1) 로 그려진 레이블.
     cnn = Sequential()
 
     cnn.add(Dense(3 * 3 * 384, input_dim=latent_size, activation='relu'))
@@ -70,10 +70,10 @@ def build_generator(latent_size):
                             activation='tanh',
                             kernel_initializer='glorot_normal'))
 
-    # 이것은 GAN 논문에서 일반적으로 참조되는 z 공간입니다.
+    # 이것은 GAN 논문에서 일반적으로 참조되는 z 공간
     latent = Input(shape=(latent_size, ))
 
-    # 이것이 우리의 라벨이 될 것입니다.
+    # 이것이 우리의 라벨이 될 것
     image_class = Input(shape=(1,), dtype='int32')
 
     cls = Flatten()(Embedding(num_classes, latent_size,
@@ -89,7 +89,7 @@ def build_generator(latent_size):
 
 def build_discriminator():
     # 참고한 논문에서 제안한 LeakyReLU를 사용하여 
-    # relatively standart conv net을 만드십시오.
+    # relatively standart conv net을 .
     cnn = Sequential()
 
     cnn.add(Conv2D(32, 3, padding='same', strides=2,
@@ -117,7 +117,7 @@ def build_discriminator():
 
     # 첫 번째 출력(name=generation)은 판별자가 표시중인 이미지가 가짜라고 
     # 생각하는지 여부이고, 두번째 출력(name=auxiliary)는 판별자가 이미지가
-    # 속해있다고 생각하는 클래스 입니다.
+    # 속해있다고 생각하는 클래스
     fake = Dense(1, activation='sigmoid', name='generation')(features)
     aux = Dense(num_classes, activation='softmax', name='auxiliary')(features)
 
@@ -149,10 +149,10 @@ if __name__ == '__main__':
     latent = Input(shape=(latent_size, ))
     image_class = Input(shape=(1,), dtype='int32')
 
-    # 가짜 이미지를 가져옵니다.
+    # 가짜 이미지를 가져오기
     fake = generator([latent, image_class])
 
-    # 우리는 결합된 모델에서만 생성자가 학습하는것을 원한다.
+    # 결합된 모델에서만 생성자가 학습하는것을 원함
     discriminator.trainable = False
     fake, aux = discriminator(fake)
     combined = Model([latent, image_class], [fake, aux])
@@ -164,7 +164,7 @@ if __name__ == '__main__':
     )
     combined.summary()
 
-    # mnist 데이터를 가지고 와서, [-1,1] 범위의 (...,28,28,1) 형태로 만듭니다.
+    # mnist 데이터를 가지고 와서, [-1,1] 범위의 (...,28,28,1) 형태로 만
     (x_train, y_train), (x_test, y_test) = mnist.load_data()
     x_train = (x_train.astype(np.float32) - 127.5) / 127.5
     x_train = np.expand_dims(x_train, axis=-1)
@@ -183,11 +183,7 @@ if __name__ == '__main__':
         num_batches = int(x_train.shape[0] / batch_size)
         progress_bar = Progbar(target=num_batches)
 
-        # 우리는 판별자가 생성 된 이미지에서 보조 분류기의 분류 정확도를 최대화하지
-        # 않기를 원하므로, 판별자가 생성 된 이미지에 대한 클래스 레이블을 생성하도록 
-        # 훈련시키지 않습니다(https://openreview.net/forum?id=rJXTf9Bxg 참조).
-        # 보조 분류기의 샘플 가중치 합계를 유지하기 위해 실제 이미지에 2의 샘플
-        # 가중치를 할당합니다.
+
         disc_sample_weight = [np.ones(2 * batch_size),
                               np.concatenate((np.ones(batch_size) * 2,
                                               np.zeros(batch_size)))]
@@ -207,31 +203,37 @@ if __name__ == '__main__':
             sampled_labels = np.random.randint(0, num_classes, batch_size)
 
             # 생성 된 레이블을 컨디셔너로 사용하여 가짜 이미지 배치를 생성합니다.
-            # 샘플링 된 레이블을 (batch_size, 1)로 변경하여 길이를 1 시퀀스로 
+            # 샘플링 된 레이블을 (len(image_batch), 1)로 변경하여 길이를 1 시퀀스로 
             # 임베딩 레이어에 넣을 수 있습니다.
             generated_images = generator.predict(
                 [noise, sampled_labels.reshape((-1, 1))], verbose=0)
 
             x = np.concatenate((image_batch, generated_images))
 
-            # 한쪽부분에 soft real/fake 레이블 사용
+            # 한방향의 soft real/fake 레이블 사용
             # Salimans et al., 2016
             # https://arxiv.org/pdf/1606.03498.pdf (Section 3.4)
             soft_zero, soft_one = 0, 0.95
             y = np.array([soft_one] * batch_size + [soft_zero] * batch_size)
             aux_y = np.concatenate((label_batch, sampled_labels), axis=0)
+            
+            # 우리는 판별자가 생성 된 이미지에서 보조 분류기의 분류 정확도를 최대화하지
+            # 않기를 원하므로, 판별자가 생성 된 이미지에 대한 클래스 레이블을 생성하도록 
+            # 훈련시키지 않습니다(https://openreview.net/forum?id=rJXTf9Bxg 참조).
+            # 보조 분류기의 샘플 가중치 합계를 유지하기 위해 실제 이미지에 2의 샘플
+            # 가중치를 할당합니다.
 
-            # 판별자가 스스로 알아낼 수 있는지 확인하십시오.
+            # 판별자가 스스로 알아낼 수 있는지 확인
             epoch_disc_loss.append(discriminator.train_on_batch(
                 x, [y, aux_y], sample_weight=disc_sample_weight))
 
             # 새로운 노이즈를 만든다. 우리는 여기에서 2*(배치사이즈) 크기를 생성하여
-            # 생성자가 판별자와 동일한 수의 이미지를 최적화하도록 합니다.
+            # 생성자가 판별자와 동일한 수의 이미지를 최적화시킴
             noise = np.random.uniform(-1, 1, (2 * batch_size, latent_size))
             sampled_labels = np.random.randint(0, num_classes, 2 * batch_size)
 
-            # 우리의 목적은 생성자가 판별자를 속이도록 훈련시키는 것이다. 생성자에 대해
-            # fake, not-fake 레이블에 대하여 not-fake 라고 하도록.
+            # 우리의 목적은 생성자에 대해 fake, not-fake레이블에 대해 not-fake라고 하도록,
+            # 제너레이터가 판별자를 속이도록 훈련하는 것
             trick = np.ones(2 * batch_size) * soft_one
 
             epoch_gen_loss.append(combined.train_on_batch(
@@ -310,7 +312,7 @@ if __name__ == '__main__':
             [i] * num_rows for i in range(num_classes)
         ]).reshape(-1, 1)
 
-        # 표시할 배치를 가져온다.
+        # 표시할 배치를 가져옴
         generated_images = generator.predict(
             [noise, sampled_labels], verbose=0)
 
