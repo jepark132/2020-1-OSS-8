@@ -11,7 +11,7 @@ import numpy as np
 import pylab as plt
 
 # 입력을 영화의 형태(n_frames, width, height, channels)로 가지고
-# 동일한 모양의 동영상을 반환하는 레이어를 만듭니다.
+# 동일한 모양의 동영상을 반환하는 레이어를 만듦
 
 seq = Sequential()
 seq.add(ConvLSTM2D(filters=40, kernel_size=(3, 3),
@@ -38,10 +38,10 @@ seq.compile(loss='binary_crossentropy', optimizer='adadelta')
 
 
 # 인공 데이터 생성:
-# 내부에 3~7 개의 윈도우가 있는 동영상 생성.
-# 움직이는 윈도우는 1x1 또는 2x2 픽셀 모양으로 시간이
-# 지남에 따라 선형으로 이동합니다.
-# 편의상 먼저 너비와 높이가 더 큰 영화 (80x80)를 만들고
+# 내부에 3-7개의 움직이는 윈도우를 포함한 움직이는movie를 생성
+# 윈도우는 1x1 또는 2x2 픽셀 형태로
+# 시간이 지남에 따라 선형으로 이동함
+# 편의상 먼저 너비와 높이가 더 큰 윈도우 (80x80)를 만들고
 # 마지막에 40x40 윈도우를 선택합니다.
 
 def generate_movies(n_samples=1200, n_frames=15):
@@ -72,10 +72,10 @@ def generate_movies(n_samples=1200, n_frames=15):
                 noisy_movies[i, t, x_shift - w: x_shift + w,
                              y_shift - w: y_shift + w, 0] += 1
 
-                # 노이즈를 추가하여 이상치로 영향을 줄입니다.
+                # 노이즈를 추가하여 이상치로 영향을 줄임
                 # 아이디어는 인터페이스 동안, 픽셀의 값이 정확히
                 # 하나가 아니라면, 네트워크를 견고하게 훈련시키고
-                # 윈도우에 속하는 픽셀로 간주해야 한다는 것 입니다.
+                # 윈도우에 속하는 픽셀로 간주해야 함.
                 if np.random.randint(0, 2):
                     noise_f = (-1)**np.random.randint(0, 2)
                     noisy_movies[i, t,
@@ -103,7 +103,7 @@ seq.fit(noisy_movies[:1000], shifted_movies[:1000], batch_size=10,
 
 # 하나의 영화에서 네트워크를 테스트하면
 # 처음 7 개의 위치로 네트워크를 공급 한
-# 다음 새 위치를 예측합니다.
+# 다음 새 위치를 예측함
 which = 1004
 track = noisy_movies[which][:7, ::, ::, ::]
 
@@ -114,7 +114,7 @@ for j in range(16):
 
 
 # 그런 다음 예측을 ground truth와
-# 비교하십시오.
+# 비교
 track2 = noisy_movies[which][::, ::, ::, ::]
 for i in range(15):
     fig = plt.figure(figsize=(10, 5))
