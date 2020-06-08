@@ -261,7 +261,7 @@ class TextImageGenerator(keras.callbacks.Callback):
         self.cur_train_index = 0
 
     # 학습 / 검증/ 시험 에서 이미지를 요청할 때 마다 텍스트의
-    # 새로운 무작위로 그리는 것이 수행
+    # 새로운 무작위로 그리는 것이 수행됨.
     def get_batch(self, index, size, train):
         # width는 RNN에 입력 될 때 시간 차원이므로 일반적인
         # width와 height는 전형적인 케라스 관례와 
@@ -362,7 +362,7 @@ def ctc_lambda_func(args):
 
 
 # 실제 OCR 응용 프로그램의 경우 사전 및 언어 모델을 사용한 빔 검색이어야 함
-# 이 예에서는 최선의 경로로 충분
+# 이 예에서는 최선의 경로로 충분함.
 
 def decode_batch(test_func, word_batch):
     out = test_func([word_batch])[0]
@@ -530,7 +530,7 @@ def train(run_name, start_epoch, stop_epoch, img_w):
             OUTPUT_DIR,
             os.path.join(run_name, 'weights%02d.h5' % (start_epoch - 1)))
         model.load_weights(weight_file)
-    # 시각화 중에 출력을 디코딩 할 수 있도록 소프트맥스의 출력을 캡처합니다.
+    # 시각화 중에 출력을 디코딩 할 수 있도록 소프트맥스의 출력을 캡처.
     test_func = K.function([input_data], [y_pred])
 
     viz_cb = VizCallback(run_name, test_func, img_gen.next_val())
