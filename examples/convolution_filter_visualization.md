@@ -92,7 +92,6 @@ def visualize_layer(model,
         epochs: 경사 상승법의 반복 횟수.
         upscaling_steps: 업샘플링의 횟수.
                          여기서 시작의 이미지는 (80, 80) 입니다.
-                         컨펌내용 확인용 이 내용이 그대로 있으면 컨펌을 확인 하지 않은것.
         upscaling_factor: output_dim 으로 이미지를 천천히
                           업그래이드 할 요소.
         output_dim: [img_width, img_height] 출력 이미지 차원.
