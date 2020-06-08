@@ -78,25 +78,25 @@ model = inception_v3.InceptionV3(weights='imagenet',
 dream = model.input
 print('Model loaded.')
 
-# 각 "key" 레이어의 상징적인 출력을 가져옵니다.(우리는 고유한 이름을 지정했었습니다.)
+# 각 "key" 레이어의 상징적인 출력을 가져오기(우리는 고유한 이름을 지정했었음.)
 layer_dict = dict([(layer.name, layer) for layer in model.layers])
 
 # 손실 정의
 loss = K.variable(0.)
 for layer_name in settings['features']:
-    # 손실에 층의 feature 의 L2 노름을 추가합니다.
+    # 손실에 층의 feature 의 L2 노름을 추가
     if layer_name not in layer_dict:
         raise ValueError('Layer ' + layer_name + ' not found in model.')
     coeff = settings['features'][layer_name]
     x = layer_dict[layer_name].output
-    # 손실에 경계가 아닌 픽셀만 포함시켜 인위 구조의 경계를 방지한다.
+    # 손실에 경계가 아닌 픽셀만 포함시켜 인위 구조의 경계를 방지
     scaling = K.prod(K.cast(K.shape(x), 'float32'))
     if K.image_data_format() == 'channels_first':
         loss = loss + coeff * K.sum(K.square(x[:, :, 2: -2, 2: -2])) / scaling
     else:
         loss = loss + coeff * K.sum(K.square(x[:, 2: -2, 2: -2, :])) / scaling
 
-# 손실에 대한 dream의 그래디언트를 계산
+# 손실에 대한 dream wrt의 그래디언트를 계산
 grads = K.gradients(loss, dream)[0]
 # 그래디언트를 정규화.
 grads /= K.maximum(K.mean(K.abs(grads)), K.epsilon())
@@ -153,7 +153,7 @@ def gradient_ascent(x, iterations, step, max_loss=None):
 업 스케일 한 결과를 원본 이미지와 비교하십시오.
 """
 
-# 이 매개변수를 사용하면 새로운 효과를 얻을 수 있습니다.
+# 이 하이퍼 매개변수를 사용하면 새로운 효과를 얻을 수 있습니다.
 step = 0.01  # 경사 상승법 단계 사이즈
 num_octave = 3  # 그라디언트 상승을 실행할 스케일 수
 octave_scale = 1.4  # 스케일 사이의 크기 비율
