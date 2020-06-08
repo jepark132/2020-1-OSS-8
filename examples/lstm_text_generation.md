@@ -1,11 +1,11 @@
 ## Nietzsche의 문서에 있는 텍스트 생성 예제 스크립트
 
-생성된 텍스트가 논리적이기 까지는 적어도 20 에폭은 필요합니다.
+생성된 텍스트가 논리적이기 까지는 적어도 20 에폭은 필요하다.
 
-반복 네트워크는 상당히 계산 집약적이므로, 이 스크립트를 GPU에서 실행시켜보는 것을 권장합니다.
+반복 네트워크는 상당히 계산 집약적이므로, 이 스크립트를 GPU에서 실행시켜보는 것을 권장한다.
 
 이 스크립트를 새로운 데이터에 대해 실행시킨다면, 당신의
-말뭉치는 적어도 100kb는 되어야 할 것입니다. 1mb면 더 좋습니다.
+말뭉치는 적어도 100kb는 되어야 하며, 1mb면 더 좋다.
 
 
 ```python
@@ -33,7 +33,7 @@ print('total chars:', len(chars))
 char_indices = dict((c, i) for i, c in enumerate(chars))
 indices_char = dict((i, c) for i, c in enumerate(chars))
 
-# maxlen 길이의 문자열에서 약간 불필요한 순서형에 있는 텍스트를 자릅니다.
+# maxlen 길이의 문자열에서 약간 불필요한 순서형에 있는 텍스트를 자른다.
 maxlen = 40
 step = 3
 sentences = []
@@ -52,7 +52,7 @@ for i, sentence in enumerate(sentences):
     y[i, char_indices[next_chars[i]]] = 1
 
 
-# 모델을 빌드합니다: 하나의 LSTM
+# 하나의 LSTM으로 모델을 빌드한다
 print('Build model...')
 model = Sequential()
 model.add(LSTM(128, input_shape=(maxlen, len(chars))))
@@ -73,7 +73,7 @@ def sample(preds, temperature=1.0):
 
 
 def on_epoch_end(epoch, _):
-    # 각 에폭의 마지막에 호출되는 함수. 생성된 텍스트를 출력합니다.
+    # 각 에폭의 마지막에 호출되는 함수. 생성된 텍스트를 출력
     print()
     print('----- Generating text after Epoch: %d' % epoch)
 
