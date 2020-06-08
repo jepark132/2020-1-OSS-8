@@ -25,7 +25,7 @@ Epoch |   TF   |   TH
 # 추가 속성
 ```cairo```와 ```editdistance``` 패키지들이 필요:  
 Cairo 라이브러리 설치 : https://cairographics.org/  
-이후 
+이후 install python dependencies 
 ```python
 pip install cairocffi
 pip install editdistance
@@ -67,7 +67,7 @@ np.random.seed(55)
 
 
 # 이것은 가우시안 노이즈를 추가하는 것보다 더 사실적으로
-# 보이는 노이즈인 "blotches"를 생성합니다.
+# 보이는 노이즈인 "blotches"를 생성
 # 픽셀 범위를 0에서 1까지의 값인 흑백이라 가정.
 
 def speckle(img):
@@ -81,7 +81,7 @@ def speckle(img):
 
 # 경계 박스를 임의의 위치에 문자열을 그립니다.
 # 또한 임의의 글꼴 및 회전, 스펙클 노이즈를
-# 사용합니다.
+# 사용
 
 def paint_text(text, w, h, rotate=False, ud=False, multi_fonts=False):
     surface = cairo.ImageSurface(cairo.FORMAT_RGB24, w, h)
@@ -109,7 +109,7 @@ def paint_text(text, w, h, rotate=False, ud=False, multi_fonts=False):
                            'Max char count is too large for given image width.'))
 
         # 캔버스에 텍스트 상자를 무작위로 맞추고 회전 할 공간을 마련하여
-        # RNN에 변환의 불변성을 학습시킵니다.
+        # RNN에 변환의 불변성을 학습시킵
         max_shift_x = w - box[2] - border_w_h[0]
         max_shift_y = h - box[3] - border_w_h[1]
         top_left_x = np.random.randint(0, int(max_shift_x))
@@ -183,9 +183,9 @@ def is_valid_str(in_str):
     return bool(search(in_str))
 
 
-# 학습 / 시험 데이터를 공급하기 위해 생성 함수를 사용합니다.
+# 학습 / 시험 데이터를 공급하기 위해 제네레이터를 사용함.
 # 임의의 변경으로 매번 이미지 랜더링 및 텍스트가
-# 즉시 생성됩니다.
+# 즉시 생성됨.
 
 class TextImageGenerator(keras.callbacks.Callback):
 
@@ -225,7 +225,7 @@ class TextImageGenerator(keras.callbacks.Callback):
                     max_string_len is None or
                     len(word) <= max_string_len)
 
-        # 모노그램 파일은 영어 스피치에서 빈도별로 정렬됩니다.
+        # 모노그램 파일은 영어 스피치에서 빈도별로 정렬됨
         with codecs.open(self.monogram_file, mode='r', encoding='utf-8') as f:
             for line in f:
                 if len(tmp_string_list) == int(self.num_words * mono_fraction):
@@ -234,7 +234,7 @@ class TextImageGenerator(keras.callbacks.Callback):
                 if _is_length_of_word_valid(word):
                     tmp_string_list.append(word)
 
-        # 바이그램파일은 영어 스피치의 일반적인 단어 쌍을 포함합니다.
+        # 바이그램파일은 영어 스피치의 일반적인 단어 쌍을 포함함
         with codecs.open(self.bigram_file, mode='r', encoding='utf-8') as f:
             lines = f.readlines()
             for line in lines:
@@ -261,10 +261,10 @@ class TextImageGenerator(keras.callbacks.Callback):
         self.cur_train_index = 0
 
     # 학습 / 검증/ 시험 에서 이미지를 요청할 때 마다 텍스트의
-    # 새로운 무작위로 그리는 것이 수행됩니다.
+    # 새로운 무작위로 그리는 것이 수행
     def get_batch(self, index, size, train):
         # width는 RNN에 입력 될 때 시간 차원이므로 일반적인
-        # width와 height는 일반적인  규칙과는 다릅니다.
+        # width와 height는 전형적인 케라스 관례와 
         if K.image_data_format() == 'channels_first':
             X_data = np.ones([size, 1, self.img_w, self.img_h])
         else:
@@ -351,18 +351,18 @@ class TextImageGenerator(keras.callbacks.Callback):
 
 
 # 실제 손실의 계산은 케 내부의 손실 함수가 아니더라도
-# 여기서 이루어집니다.
+# 여기서 이루어짐
 
 def ctc_lambda_func(args):
     y_pred, labels, input_length, label_length = args
     # RNN의 첫 출력은 쓰레기 값인 경향이 있기 때문에
-    # 2가 중요합니다.
+    # 2가 중요함
     y_pred = y_pred[:, 2:, :]
     return K.ctc_batch_cost(labels, y_pred, input_length, label_length)
 
 
-# 실제 OCR 응용 프로그램의 경우 사전 및 언어 모델을 사용한 빔 검색이어야합니다
-# 이 예에서는 최선의 경로로 충분합니다.
+# 실제 OCR 응용 프로그램의 경우 사전 및 언어 모델을 사용한 빔 검색이어야 함
+# 이 예에서는 최선의 경로로 충분
 
 def decode_batch(test_func, word_batch):
     out = test_func([word_batch])[0]
@@ -482,11 +482,11 @@ def train(run_name, start_epoch, stop_epoch, img_w):
                         (img_h // (pool_size ** 2)) * conv_filters)
     inner = Reshape(target_shape=conv_to_rnn_dims, name='reshape')(inner)
 
-    # RNN으로 들어가도록 입력 크기를 줄입니다.
+    # RNN에 들어갈 입력 크기를 줄임
     inner = Dense(time_dense_size, activation=act, name='dense1')(inner)
 
     # 양방향 GRU의 두개의 층
-    # LSTM보다 좋지 않은 경우 GRU도 잘 작동하는 것 같습니다.
+    # LSTM 만큼은 아니지만 GRU도 잘 작동
     gru_1 = GRU(rnn_size, return_sequences=True,
                 kernel_initializer='he_normal', name='gru1')(inner)
     gru_1b = GRU(rnn_size, return_sequences=True,
@@ -498,7 +498,7 @@ def train(run_name, start_epoch, stop_epoch, img_w):
     gru_2b = GRU(rnn_size, return_sequences=True, go_backwards=True,
                  kernel_initializer='he_normal', name='gru2_b')(gru1_merged)
 
-    # RNN 출력을 문자 활성으로 변환합니다.
+    # RNN 출력을 문자 활성으로 변환함.
     inner = Dense(img_gen.get_output_size(), kernel_initializer='he_normal',
                   name='dense2')(concatenate([gru_2, gru_2b]))
     y_pred = Activation('softmax', name='softmax')(inner)
@@ -509,12 +509,12 @@ def train(run_name, start_epoch, stop_epoch, img_w):
     input_length = Input(name='input_length', shape=[1], dtype='int64')
     label_length = Input(name='label_length', shape=[1], dtype='int64')
     # 케라스는 현재 추가 파라미터로 손실 함수를 지원하지 않으므로
-    # CTC 손실은 람다 층예서 구현됩니다.
+    # CTC 손실은 람다 층예서 구현됨
     loss_out = Lambda(
         ctc_lambda_func, output_shape=(1,),
         name='ctc')([y_pred, labels, input_length, label_length])
 
-    # clipnorm 수렴속도를 높이는 것 같습니다.
+    # clipnorm 수렴속도를 높이는 것으로 보임
     sgd = SGD(learning_rate=0.02,
               decay=1e-6,
               momentum=0.9,
