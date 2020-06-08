@@ -1,7 +1,7 @@
 # Train a simple deep CNN on the CIFAR10 small images dataset.
 
 
-25 epoch에서 75%의 검증 정확도, 50 epoch에서 79 %에 달합니다.(그러나 여전히 이 시점에서는 정확하지 않습니다).
+25 에포치에서 75%의 검증 정확도, 50 epoch에서 79 %에 달함.(그러나 여전히 이 시점에서는 정확하지 않음).
 
 ```python
 from __future__ import print_function
@@ -89,14 +89,14 @@ else:
         width_shift_range=0.1,
         # 이미지를 세로로 임의로 이동 (fraction of total height)
         height_shift_range=0.1,
-        shear_range=0.,  # set range for random shear
-        zoom_range=0.,  # set range for random zoom
-        channel_shift_range=0.,  # set range for random channel shifts
+        shear_range=0.,  # 랜덤 shear의 설정 범위
+        zoom_range=0.,  # 랜덤 zoom의 설정 범위
+        channel_shift_range=0.,  # 랜덤 채널 시프트를위한 랜덤 설정 범위
         # 입력 경계 밖의 점을 채우기위한 설정 모드
         fill_mode='nearest',
-        cval=0.,  # value used for fill_mode = "constant"
-        horizontal_flip=True,  # randomly flip images
-        vertical_flip=False,  # randomly flip images
+        cval=0.,  # fill_mode = "constant"에 사용 된 값
+        horizontal_flip=True,  # 무작위로 이미지 뒤집기
+        vertical_flip=False,  # 무작위로 이미지 뒤집기
         # rescaling factor 설정 (다른 변환 전에 적용)
         rescale=None,
         # 각 입력에 적용될 설정 기능
@@ -107,7 +107,7 @@ else:
         validation_split=0.0)
 
     # 기능별 정규화에 필요한 계산
-    # (std, mean, and principal components if ZCA whitening is applied).
+    # (ZCA whitening 적용된 경우 표준, 평균 및 주요 구성 요소).
     datagen.fit(x_train)
 
     # datagen.flow ()로 생성 된 배치에 모델을 맞춤
