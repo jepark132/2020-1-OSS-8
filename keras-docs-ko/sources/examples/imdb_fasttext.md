@@ -6,8 +6,8 @@ Joulin et al의 논문을 바탕으로 함:
 ](https://arxiv.org/abs/1607.01759)
    
 IMBD 데이터 집합과 유니그램 모형이나 바이그램 모형:
-
-Embedding|Accuracy, 5 epochs|Speed (s/epoch)|Hardware
+  
+  임베딩  | 정확도, 5 에포크  | 속도 (초/에포크)| 하
 :--------|-----------------:|----:|:-------
 Uni-gram |            0.8813|    8|i7 CPU
 Bi-gram  |            0.9056|    2|GTx 980M GPU
@@ -121,17 +121,17 @@ print('x_test shape:', x_test.shape)
 print('Build model...')
 model = Sequential()
 
-# 효율적인 embedding 층부터 시작
+# 효율적인 임베딩 층부터 시작
 # 우리의 어휘는 embedding_dims 차원으로 색인
 model.add(Embedding(max_features,
                     embedding_dims,
                     input_length=maxlen))
 
-# embeddings를 평균 낼  GlobalAveragePooling1D를 더하라
+# embeddings를 평균 낼  GlobalAveragePooling1D를 추가
 # 문서 내 모든 단어 중
 model.add(GlobalAveragePooling1D())
 
-# 단일 단위 출력 레이어에 반영하여 S자형으로 압착한다:
+# 단일 단위 출력 레이어에 반영하여 S자형으로 압착:
 model.add(Dense(1, activation='sigmoid'))
 
 model.compile(loss='binary_crossentropy',
