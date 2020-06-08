@@ -1,7 +1,7 @@
 # Visualization of the filters of VGG16, via gradient ascent in input space.
 
 
-이 스크립트는 몇 분 안에 CPU에서 실행될 수 있습니다.
+이 스크립트는 몇 분 안에 CPU에서 실행 가능함.
 
 결과 예시:
 ![example](./images/ml.jpg)
@@ -20,22 +20,21 @@ from keras import backend as K
 
 
 def normalize(x):
-    """utility function to normalize a tensor.
+    """텐서를 정규화하는 유틸리티 기능.
 
     # Arguments
-        x: An input tensor.
+        x: 입력값 텐서.
 
-    # Returns
-        The normalized input tensor.
+    # Returns        
+       정규화 된 입력 텐서.
     """
     return x / (K.sqrt(K.mean(K.square(x))) + K.epsilon())
 
 
 def deprocess_image(x):
-    """utility function to convert a float array into a valid uint8 image.
-
+    """ float 배열을 유효한 uint8 이미지로 변환하는 유틸리티 기능.
     # Arguments
-        x: A numpy-array representing the generated image.
+        x: 생성된 이미지를 나타내는 숫자 배열
 
     # Returns
         A processed numpy-array, which could be used in e.g. imshow.
@@ -58,16 +57,15 @@ def deprocess_image(x):
 
 
 def process_image(x, former):
-    """utility function to convert a valid uint8 image back into a float array.
-       Reverses `deprocess_image`.
+    """유효한 uint8 이미지를 부동 배열로 다시 변환하는 유틸리티 기능.
+       deprocess_image`를 되돌림
 
     # Arguments
         x: A numpy-array, which could be used in e.g. imshow.
         former: The former numpy-array.
-                Need to determine the former mean and variance.
-
+                former의 평균과 분산을 결정해야합니다.
     # Returns
-        A processed numpy-array representing the generated image.
+       생성된 이미지를 나타내는 처리 된 numpy 배열
     """
     if K.image_data_format() == 'channels_first':
         x = x.transpose((2, 0, 1))
@@ -82,39 +80,38 @@ def visualize_layer(model,
                     upscaling_factor=1.2,
                     output_dim=(412, 412),
                     filter_range=(0, None)):
-    """Visualizes the most relevant filters of one conv-layer in a certain model.
+    """특정 모델에서 하나의 변환 레이어의 가장 관련성이 높은 필터를 시각화함.
+
 
     # Arguments
-        model: The model containing layer_name.
-        layer_name: The name of the layer to be visualized.
-                    Has to be a part of model.
-        step: step size for gradient ascent.
-        epochs: Number of iterations for gradient ascent.
-        upscaling_steps: Number of upscaling steps.
-                         Starting image is in this case (80, 80).
-        upscaling_factor: Factor to which to slowly upgrade
-                          the image towards output_dim.
-        output_dim: [img_width, img_height] The output image dimensions.
+        model: layer_name을 포함하는 모델.
+        layer_name: 시각화 할 레이어의 이름.
+                    모델의 일부여야함.
+        step: 경사 상승을위한 단계 크기.
+        epochs: 경사 상승에 대한 반복 횟수입니다.
+        upscaling_steps: 업 스케일링 단계수
+                         이 경우 시작 이미지는 (80, 80).
+        upscaling_factor: output_dim쪽으로 이미지를 천천히 업그레이드 할 요소.
+        output_dim: [img_width, img_height] 출력 이미지 치수.
         filter_range: Tupel[lower, upper]
-                      Determines the to be computed filter numbers.
-                      If the second value is `None`,
-                      the last filter will be inferred as the upper boundary.
+                     계산할 필터 번호를 결정.
+                     두 번째 값이 '없음'이면 마지막 필터는 상한으로 간주.
     """
 
     def _generate_filter_image(input_img,
                                layer_output,
                                filter_index):
-        """Generates image for one particular filter.
+        """하나의 특정 필터에 대한 이미지를 생성
 
         # Arguments
             input_img: The input-image Tensor.
             layer_output: The output-image Tensor.
-            filter_index: The to be processed filter number.
-                          Assumed to be valid.
+            filter_index: 처리 할 필터 번호.
+                          유효하다고 가정.
 
         #Returns
-            Either None if no image could be generated.
-            or a tuple of the image (array) itself and the last loss.
+           이미지를 생성 할 수 없으면 없음.
+           또는 이미지 (배열) 자체와 마지막 손실의 튜플.
         """
         s_time = time.time()
 
@@ -128,7 +125,7 @@ def visualize_layer(model,
         # 이 손실로 입력 그림의 기울기를 계산
         grads = K.gradients(loss, input_img)[0]
 
-        # 정규화 트릭 : 그라디언트를 정규화다
+        # 정규화 트릭 : 경사를 정규화다
         grads = normalize(grads)
 
         # 이 함수는 입력 그림이 주어지면 손실과 그라데이션을 반환합니다
@@ -150,7 +147,7 @@ def visualize_layer(model,
         # 412d 이미지를 직접 계산하면 발생합니다.
         # 각각의 다음 차원에 대해 더 나은 시작점으로 작동하므로 로컬 최소 점을 피합니다    
         for up in reversed(range(upscaling_steps)):
-            # 그라디언트 상승을 실행 e.g. 20 steps
+            # 경사 상승을 실행 e.g. 20 steps
             for _ in range(epochs):
                 loss_value, grads_value = iterate([input_img_data])
                 input_img_data += grads_value * step
@@ -178,13 +175,12 @@ def visualize_layer(model,
         return img, loss_value
 
     def _draw_filters(filters, n=None):
-        """Draw the best filters in a nxn grid.
+        """nxn 격자에 최상의 필터를 그림.
 
         # Arguments
-            filters: A List of generated images and their corresponding losses
-                     for each processed filter.
-            n: dimension of the grid.
-               If none, the largest possible square will be used
+            filters: 처리 된 각 필터에 대해 생성 된 이미지 및 해당 손실 목록.
+            n: 그리드의 치수.
+               없는 경우 가능한 가장 큰 사각형이 사용
         """
         if n is None:
             n = int(np.floor(np.sqrt(len(filters))))
