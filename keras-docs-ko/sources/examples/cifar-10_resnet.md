@@ -68,7 +68,7 @@ subtract_pixel_mean = True
 n = 3
 
 # 모델 버전
-# Orig paper: version = 1 (ResNet v1), Improved ResNet: version = 2 (ResNet v2)
+# 원본 논문: version = 1 (ResNet v1), 개선된 ResNet: version = 2 (ResNet v2)
 version = 1
 
 # 제공된 모델 파라미터 n에서 계산 된 깊이
@@ -90,7 +90,7 @@ input_shape = x_train.shape[1:]
 x_train = x_train.astype('float32') / 255
 x_test = x_test.astype('float32') / 255
 
-# If subtract pixel mean is enabled
+# 빼기 픽셀 평균이 활성화 된 경우
 if subtract_pixel_mean:
     x_train_mean = np.mean(x_train, axis=0)
     x_train -= x_train_mean
@@ -107,16 +107,17 @@ y_test = keras.utils.to_categorical(y_test, num_classes)
 
 
 def lr_schedule(epoch):
-    """Learning Rate Schedule
+    """학습 속도 일정
 
-    Learning rate is scheduled to be reduced after 80, 120, 160, 180 epochs.
-    Called automatically every epoch as part of callbacks during training.
+   
+    학습 속도는 80, 120, 160, 180 시대 이후에 줄어들 것으로 예상됨.
+    훈련 중 콜백의 일부로 모든 시대를 자동으로 호출함.
 
     # Arguments
-        epoch (int): The number of epochs
+        epoch (int): 에포치 숫자
 
     # Returns
-        lr (float32): learning rate
+        lr (float32): 학습 비율
     """
     lr = 1e-3
     if epoch > 180:
@@ -138,20 +139,20 @@ def resnet_layer(inputs,
                  activation='relu',
                  batch_normalization=True,
                  conv_first=True):
-    """2D Convolution-Batch Normalization-Activation stack builder
+    """2D 컨볼 루션-배치 정규화-활성화 스택 빌더
 
     # Arguments
-        inputs (tensor): input tensor from input image or previous layer
-        num_filters (int): Conv2D number of filters
-        kernel_size (int): Conv2D square kernel dimensions
-        strides (int): Conv2D square stride dimensions
-        activation (string): activation name
-        batch_normalization (bool): whether to include batch normalization
-        conv_first (bool): conv-bn-activation (True) or
-            bn-activation-conv (False)
+        inputs (tensor): 입력 이미지 또는 이전 레이어의 입력 텐서
+        num_filters (int): Conv2D 필터 수
+        kernel_size (int): Conv2D 사각 커널 치수
+        strides (int): Conv2D 사각형 보폭
+        activation (string): 활성화 이름
+        batch_normalization (bool): 배치 정규화 포함 여부
+        conv_first (bool): 전환 수 활성화 (참) 또는
+            bn-활성화 전환 (거짓)
 
     # Returns
-        x (tensor): tensor as input to the next layer
+        x (tensor): 다음 레이어에 입력으로 텐서
     """
     conv = Conv2D(num_filters,
                   kernel_size=kernel_size,
@@ -177,19 +178,18 @@ def resnet_layer(inputs,
 
 
 def resnet_v1(input_shape, depth, num_classes=10):
-    """ResNet Version 1 Model builder [a]
-
-    Stacks of 2 x (3 x 3) Conv2D-BN-ReLU
-    Last ReLU is after the shortcut connection.
-    At the beginning of each stage, the feature map size is halved (downsampled)
-    by a convolutional layer with strides=2, while the number of filters is
-    doubled. Within each stage, the layers have the same number filters and the
-    same number of filters.
-    Features maps sizes:
+    """ResNet 버전 1 모델 빌더 [a]
+   
+    2 x (3 x 3) Conv2D-BN-ReLU의 스택
+    마지막 ReLU는 바로 가기 연결 후.
+    각 단계의 시작 부분에서 기능 맵 크기가 절반으로 줄어듬 (다운 샘플링).
+    걸음 수 = 2 인 컨볼 루션 레이어에 의한 반면 필터의 수는 두 배. 
+    각 단계에서 레이어는 동일한 수의 필터를 가지며 같은 수의 필터임.
+    기능 맵 크기:
     stage 0: 32x32, 16
     stage 1: 16x16, 32
-    stage 2:  8x8,  64
-    The Number of parameters is approx the same as Table 6 of [a]:
+    stage 2:  8x8,  64    
+    매개 변수 수는 [a]의 표 6과 대략 동일:
     ResNet20 0.27M
     ResNet32 0.46M
     ResNet44 0.66M
@@ -197,12 +197,12 @@ def resnet_v1(input_shape, depth, num_classes=10):
     ResNet110 1.7M
 
     # Arguments
-        input_shape (tensor): shape of input image tensor
-        depth (int): number of core convolutional layers
-        num_classes (int): number of classes (CIFAR10 has 10)
+        input_shape (tensor): 입력 이미지 텐서의 모양
+        depth (int): 핵심 컨볼 루션 레이어의 수
+        num_classes (int): 클래스의 수 (CIFAR10 has 10)
 
     # Returns
-        model (Model): Keras model instance
+        model (Model): Keras 모델 인스턴스
     """
     if (depth - 2) % 6 != 0:
         raise ValueError('depth should be 6n+2 (eg 20, 32, 44 in [a])')
@@ -237,7 +237,7 @@ def resnet_v1(input_shape, depth, num_classes=10):
             x = Activation('relu')(x)
         num_filters *= 2
 
-    # Add classifier on top.
+    # 상단에 분류기를 추가.
     # v1은 마지막 바로 가기 연결 후 BN을 사용하지 않습니다.
     x = AveragePooling2D(pool_size=8)(x)
     y = Flatten()(x)
@@ -245,7 +245,7 @@ def resnet_v1(input_shape, depth, num_classes=10):
                     activation='softmax',
                     kernel_initializer='he_normal')(y)
 
-    # Instantiate model.
+    # 인스턴스화 모델.
     model = Model(inputs=inputs, outputs=outputs)
     return model
 
@@ -253,14 +253,15 @@ def resnet_v1(input_shape, depth, num_classes=10):
 def resnet_v2(input_shape, depth, num_classes=10):
     """ResNet Version 2 Model builder [b]
 
-    Stacks of (1 x 1)-(3 x 3)-(1 x 1) BN-ReLU-Conv2D or also known as
-    bottleneck layer
+   
+    (1 x 1)-(3 x 3)-(1 x 1) BN-ReLU-Conv2D 또는 병목 현상 레이어
     First shortcut connection per layer is 1 x 1 Conv2D.
     Second and onwards shortcut connection is identity.
-    At the beginning of each stage, the feature map size is halved (downsampled)
-    by a convolutional layer with strides=2, while the number of filter maps is
-    doubled. Within each stage, the layers have the same number filters and the
-    same filter map sizes.
+    레이어 당 첫 번째 바로 가기 연결은 1 x 1 Conv2D.
+    두 번째 이후의 바로 가기 연결은 ID.  
+    각 단계의 시작 부분에서 기능 맵 크기가 절반으로 줄어듬 (다운 샘플링).
+    필터 맵의 수는 두 배.
+    각 단계에서 레이어는 동일한 수의 필터를 가지며 동일한 필터 맵 크기.
     Features maps sizes:
     conv1  : 32x32,  16
     stage 0: 32x32,  64
@@ -268,16 +269,16 @@ def resnet_v2(input_shape, depth, num_classes=10):
     stage 2:  8x8,  256
 
     # Arguments
-        input_shape (tensor): shape of input image tensor
-        depth (int): number of core convolutional layers
-        num_classes (int): number of classes (CIFAR10 has 10)
+        input_shape (tensor): 입력 이미지 텐서의 모양
+        depth (int): 핵심 컨볼 루션 레이어의 수
+        num_classes (int): 클래스의 수 (CIFAR10 has 10)
 
     # Returns
-        model (Model): Keras model instance
+        model (Model): Keras 
     """
     if (depth - 2) % 9 != 0:
         raise ValueError('depth should be 9n+2 (eg 56 or 110 in [b])')
-    # Start model definition.
+    # 모델 정의를 시작.
     num_filters_in = 16
     num_res_blocks = int((depth - 2) / 9)
 
@@ -331,7 +332,7 @@ def resnet_v2(input_shape, depth, num_classes=10):
 
         num_filters_in = num_filters_out
 
-    # Add classifier on top.
+    # 상단에 분류기를 추가.
     # 풀링하기 전에 v2에 BN-ReLU가 있음
     x = BatchNormalization()(x)
     x = Activation('relu')(x)
