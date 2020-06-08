@@ -5,9 +5,9 @@
 
 ### 참고
 
-- RNN은 까다롭습니다. 중요한 것은 배치 사이즈를 결정하는 것과, 손실과 최적화 함수의 결정 등이 있습니다. 어떤 배열들은 수렴되지 않습니다. 
+- RNN은 까다롭습니다. 중요한 것은 배치 사이즈를 결정하는 것과, 손실과 최적화 함수의 결정 등이 있습니다. 어떤 배열들은 수렴되지 않음.
 
-- 학습 시 LSTM 손실 감소 패턴은 CNN, MLP 등에서 보이는 양상과 다소 다를 수 있습니다.
+- 학습 시 LSTM 손실 감소 패턴은 CNN, MLP 등에서 보이는 양상과 다소 다를 수 있음.
 
 ```python
 from __future__ import print_function
@@ -19,7 +19,7 @@ from keras.layers import LSTM
 from keras.datasets import imdb
 
 max_features = 20000
-# 이 문자열 후의 텍스트를 자릅니다 (max_features에서 가장 비슷한 단어들 중에서)
+# 이 문자열 후의 텍스트를 자름 (max_features에서 가장 비슷한 단어들 중에서)
 maxlen = 80
 batch_size = 32
 
@@ -40,7 +40,7 @@ model.add(Embedding(max_features, 128))
 model.add(LSTM(128, dropout=0.2, recurrent_dropout=0.2))
 model.add(Dense(1, activation='sigmoid'))
 
-# 여러 최적화 함수와 배치들을 사용하십시오
+# 여러 최적화 함수와 배치들을 사용
 model.compile(loss='binary_crossentropy',
               optimizer='adam',
               metrics=['accuracy'])
