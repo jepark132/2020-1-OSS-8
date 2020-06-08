@@ -14,7 +14,7 @@ from keras.datasets import imdb
 
 
 max_features = 20000
-# 이 단어 수만큼 텍스트를 자르십시오.
+# 이 수만큼의 단어 후에 텍스트를 자르기
 # (가장 일반적인 단어 중 위의 max_features.)
 maxlen = 100
 batch_size = 32
@@ -38,7 +38,7 @@ model.add(Bidirectional(LSTM(64)))
 model.add(Dropout(0.5))
 model.add(Dense(1, activation='sigmoid'))
 
-# 다른 옵티마이저와 옵티마이저의 구성을 다르게 사용해보십시오.
+# 다른 옵티마이저와 옵티마이저의 구성을 다르게 시도해 볼 것
 model.compile('adam', 'binary_crossentropy', metrics=['accuracy'])
 
 print('Train...')
