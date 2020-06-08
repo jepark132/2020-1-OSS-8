@@ -1,11 +1,11 @@
 # Trains a memory network on the bAbI dataset.
 
-증빙 서류:
+참고 문헌:
 
 * Jason Weston, Antoine Bordes, Sumit Chopra, Tomas Mikolov, Alexander M. Rush, "[Towards AI-Complete Question Answering: A Set of Prerequisite Toy Tasks](https://arxiv.org/abs/1502.05698)"
 * Sainbayar Sukhbaatar, Arthur Szlam, Jason Weston, Rob Fergus, "[End-To-End Memory Networks](https://arxiv.org/abs/1503.08895)"
 
-120 번의 epoch 이후 작업 'single_supporting_fact_10k'에서 98.6 %의 정확도에 도달합니다. epoch 당 시간 : CPU에서 3 초 (코어 i7).
+120 번의 epoch 이후 작업 'single_supporting_fact_10k'에서 98.6 %의 정확도에 도달함. epoch 당 시간 : CPU에서 3 초 (코어 i7).
 
 ```python
 from __future__ import print_function
@@ -24,7 +24,7 @@ import re
 
 
 def tokenize(sent):
-    '''Return the tokens of a sentence including punctuation.
+    ''' 문장 부호를 포함한 문장의 토큰을 반환함
 
     >>> tokenize('Bob dropped the apple. Where is the apple?')
     ['Bob', 'dropped', 'the', 'apple', '.', 'Where', 'is', 'the', 'apple', '?']
@@ -33,10 +33,9 @@ def tokenize(sent):
 
 
 def parse_stories(lines, only_supporting=False):
-    '''Parse stories provided in the bAbi tasks format
-
-    If only_supporting is true, only the sentences
-    that support the answer are kept.
+    ''' bAbi 작업 형식으로 제공되는 스토리 분석
+    
+    only_supporting이 true 인 경우의 문장만 그 대답을 지지.
     '''
     data = []
     story = []
@@ -65,12 +64,12 @@ def parse_stories(lines, only_supporting=False):
 
 
 def get_stories(f, only_supporting=False, max_length=None):
-    '''Given a file name, read the file,
-    retrieve the stories,
-    and then convert the sentences into a single story.
+    '''파일 이름이 주어지면 파일을 읽고 이야기를 검색한 후,
+       문장을 단일 스토리로 변환
 
-    If max_length is supplied,
-    any stories longer than max_length tokens will be discarded.
+   
+    max_length가 제공되면
+    max_length 토큰보다 긴 스토리는 삭제됨
     '''
     data = parse_stories(f.readlines(), only_supporting=only_supporting)
     flatten = lambda data: reduce(lambda x, y: x + y, data)
@@ -162,7 +161,7 @@ print('Compiling...')
 input_sequence = Input((story_maxlen,))
 question = Input((query_maxlen,))
 
-# 엔코더
+# 인코더
 # 연속된 입력값을 벡터로 통합
 input_encoder_m = Sequential()
 input_encoder_m.add(Embedding(input_dim=vocab_size,
@@ -185,7 +184,7 @@ question_encoder.add(Embedding(input_dim=vocab_size,
 question_encoder.add(Dropout(0.3))
 # 출력값: (samples, query_maxlen, embedding_dim)
 
-# 입력값 엔코딩
+# 입력값 인코딩
 input_encoded_m = input_encoder_m(input_sequence)
 input_encoded_c = input_encoder_c(input_sequence)
 question_encoded = question_encoder(question)
